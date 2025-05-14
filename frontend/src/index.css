@@ -1,0 +1,23 @@
+/* Reset CSS */
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin: 0;
+	font-family: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: #343541;
+	color: rgba(255, 255, 255, 0.9);
+}
+
+code {
+	font-family: "Söhne Mono", Menlo, Monaco, "Courier New", monospace;
+}
+
+#root {
+	height: 100vh;
+}

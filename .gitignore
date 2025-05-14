@@ -1,0 +1,67 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.venv/
+.env/
+*.so
+.Python
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Build files
+/build/
+/dist/
+/frontend/build/
+/backend/dist/
+/backend/build/
+
+# Testing
+/coverage/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# Editor directories and files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Cache
+.npm/
+.eslintcache
+
+# TypeScript incremental compilation cache
+*.tsbuildinfo
+
+# Misc
+.cache/
+.temp/
