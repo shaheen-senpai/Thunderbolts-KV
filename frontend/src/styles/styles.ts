@@ -9,7 +9,7 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   body {
-    font-family: 'Söhne', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-family:Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background-color: #343541;
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.5;
@@ -47,7 +47,7 @@ export const Sidebar = styled.div`
 	display: flex;
 	flex-direction: column;
 
-	@media (max-width: 768px) {
+@media (max-width: 768px) {
 		display: none;
 	}
 `;
@@ -131,11 +131,12 @@ export const WelcomeContainer = styled.div`
 	height: 100%;
 	padding: 0 20px;
 	text-align: center;
+	background-color:#202123;
+ 
 `;
 
 export const WelcomeTitle = styled.h1`
 	font-size: 2rem;
-	font-weight: 600;
 	margin-bottom: 24px;
 	color: rgba(255, 255, 255, 0.9);
 `;
@@ -146,7 +147,6 @@ export const WelcomeSubtitle = styled.p`
 	max-width: 600px;
 	margin-bottom: 32px;
 `;
-
 export const ExampleContainer = styled.div`
 	display: flex;
 	gap: 16px;
@@ -156,7 +156,7 @@ export const ExampleContainer = styled.div`
 `;
 
 export const ExampleCard = styled.div`
-	background-color: #444654;
+	background-color: #303030;
 	border-radius: 8px;
 	padding: 16px;
 	width: 280px;
