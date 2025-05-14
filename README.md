@@ -1,11 +1,10 @@
-# ChatGPT Clone with Gemini API
+# ChatGPT Clone
 
-This project is a clone of the OpenAI ChatGPT web interface that uses Google's Gemini API instead of OpenAI's API. It features a modern, responsive UI that closely resembles the official ChatGPT interface.
+This project is a clone of the OpenAI ChatGPT web interface that uses several other AI instead of OpenAI's API. It features a modern, responsive UI that closely resembles the official ChatGPT interface.
 
 ## Features
 
 - 🎨 ChatGPT-like user interface
-- 💬 Chat with Google's Gemini AI
 - 🧠 Conversation history saved in browser storage
 - 🔄 Regenerate responses
 - 📊 Markdown support for code blocks and formatting
