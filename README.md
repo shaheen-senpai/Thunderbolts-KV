@@ -60,7 +60,7 @@ This will start both the frontend and backend servers:
 
 If you encounter any issues:
 
-1. Make sure your Gemini API key is correctly set in the backend `.env` file
+1. Make sure your API keys is correctly set in the backend `.env` file
 2. Check that both frontend and backend servers are running
 3. Clear your browser cache and local storage if you experience UI issues
 
