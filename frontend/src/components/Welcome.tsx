@@ -27,9 +27,9 @@ const examplePrompts = [
 const Welcome: React.FC<WelcomeProps> = ({ onSelectExample }) => {
 	return (
 		<WelcomeContainer>
-			<WelcomeTitle>GeminiGPT</WelcomeTitle>
+			<WelcomeTitle>KV-GPT</WelcomeTitle>
 			<WelcomeSubtitle>
-				A ChatGPT-like interface powered by Google's Gemini AI. Ask a question or select an example below to get started.
+				A ChatGPT-like interface powered by Agentic AI. Ask a question or select an example below to get started.
 			</WelcomeSubtitle>
 
 			<ExampleContainer>
