@@ -56,6 +56,7 @@ class Message(BaseModel):
 
 class ChatRequest(BaseModel):
     messages: List[Message]
+    agent: Optional[str] = 'gemini'
 
 # Chat route
 @app.post("/api/chat")
@@ -67,33 +68,53 @@ async def chat(request: ChatRequest):
             for msg in request.messages
         ])
         
-        # Get the model - Using Gemini Flash 2 for free tier
-        model = genai.GenerativeModel(
-            model_name="gemini-2.0-flash",
-            safety_settings=safety_settings
-        )
-        
-        # Generate content
-        response = model.generate_content(prompt)
-        text = response.text
+        agent = request.agent or 'gemini'
+        if agent == 'claude':
+            import anthropic
+            client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+            model_name = os.getenv("ANTHROPIC_MODEL_NAME", "claude-3-7-sonnet-20250219")
+            message = client.messages.create(
+                model=model_name,
+                max_tokens=1024,
+                messages=[{"role": m.role, "content": m.content} for m in request.messages]
+            )
+            text = message.content[0].text if hasattr(message.content[0], 'text') else str(message.content[0])
+        else:
+            model = genai.GenerativeModel(
+                model_name="gemini-2.0-flash",
+                safety_settings=safety_settings
+            )
+            response = model.generate_content(prompt)
+            text = response.text
         
         return {"role": "assistant", "content": text}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to process your request: {str(e)}")
 
 # Function to stream response
-async def stream_response(prompt):
-    model = genai.GenerativeModel(
-        model_name="gemini-2.0-flash", 
-        safety_settings=safety_settings
-    )
-    
-    response = model.generate_content(prompt, stream=True)
-    
-    for chunk in response:
-        chunk_text = chunk.text
-        if chunk_text:
-            yield f"data: {{'content': '{chunk_text}'}}\n\n"
+async def stream_response(prompt, agent):
+    if agent == 'claude':
+        import anthropic
+        client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+        model_name = os.getenv("ANTHROPIC_MODEL_NAME", "claude-3-7-sonnet-20250219")
+        message = client.messages.create(
+            model=model_name,
+            max_tokens=1024,
+            messages=[{"role": "user", "content": prompt}]
+        )
+        text = message.content[0].text if hasattr(message.content[0], 'text') else str(message.content[0])
+        yield f"data: {{'content': '{text}'}}\n\n"
+    else:
+        model = genai.GenerativeModel(
+            model_name="gemini-2.0-flash", 
+            safety_settings=safety_settings
+        )
+        response = model.generate_content(prompt, stream=True)
+        
+        for chunk in response:
+            chunk_text = chunk.text
+            if chunk_text:
+                yield f"data: {{'content': '{chunk_text}'}}\n\n"
     
     yield "data: [DONE]\n\n"
 
@@ -107,9 +128,10 @@ async def chat_stream(request: ChatRequest):
             for msg in request.messages
         ])
         
+        agent = request.agent or 'gemini'
         # Return streaming response
         return StreamingResponse(
-            stream_response(prompt),
+            stream_response(prompt, agent),
             media_type="text/event-stream"
         )
     except Exception as e:

@@ -40,7 +40,7 @@ const ChatSidebar: React.FC<SidebarProps> = ({ conversations, activeConversation
 			</SidebarConversations>
 
 			<SidebarFooter>
-				<div style={{ fontSize: "12px", color: "rgba(255, 255, 255, 0.5)" }}>GeminiGPT - Powered by Google Gemini AI</div>
+				<div style={{ fontSize: "12px", color: "rgba(255, 255, 255, 0.5)" }}>KV-GPT - Powered by AI</div>
 			</SidebarFooter>
 		</Sidebar>
 	);

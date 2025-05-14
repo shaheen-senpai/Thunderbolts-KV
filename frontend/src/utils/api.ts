@@ -7,9 +7,9 @@ export interface Message {
 	content: string;
 }
 
-export const sendMessage = async (messages: Message[]): Promise<Message> => {
+export const sendMessage = async (messages: Message[], agent: "gemini" | "claude"): Promise<Message> => {
 	try {
-		const response = await axios.post(`${API_URL}/chat`, { messages });
+		const response = await axios.post(`${API_URL}/chat`, { messages, agent });
 		return response.data;
 	} catch (error) {
 		console.error("Error sending message:", error);
@@ -17,14 +17,19 @@ export const sendMessage = async (messages: Message[]): Promise<Message> => {
 	}
 };
 
-export const sendMessageStream = async (messages: Message[], onChunk: (chunk: string) => void, onDone: () => void): Promise<void> => {
+export const sendMessageStream = async (
+	messages: Message[],
+	agent: "gemini" | "claude",
+	onChunk: (chunk: string) => void,
+	onDone: () => void
+): Promise<void> => {
 	try {
 		const response = await fetch(`${API_URL}/chat/stream`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ messages }),
+			body: JSON.stringify({ messages, agent }),
 		});
 
 		if (!response.body) {
