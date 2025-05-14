@@ -1,47 +1,54 @@
-import React from "react";
-import { WelcomeContainer, WelcomeTitle, WelcomeSubtitle, ExampleContainer, ExampleCard, ExampleTitle, ExampleText } from "../styles/styles";
+import React, { useState } from "react";
+import {
+  WelcomeContainer,
+  WelcomeContent,
+  WelcomeTitle,
+  WelcomeSubtitle,
+  ChatInputWrapper,
+  ChatInputBox,
+} from "../styles/welcome";
 
 interface WelcomeProps {
-	onSelectExample: (text: string) => void;
+  onSelectExample: (text: string) => void;
 }
 
-const examplePrompts = [
-	{
-		title: "Explain quantum computing",
-		text: "Explain quantum computing in simple terms",
-	},
-	{
-		title: "Creative ideas",
-		text: "Got any creative ideas for a 10 year old's birthday?",
-	},
-	{
-		title: "Code explanation",
-		text: "How do I make an HTTP request in Javascript?",
-	},
-	{
-		title: "Learn something",
-		text: "Explain the basic principles of machine learning",
-	},
-];
-
 const Welcome: React.FC<WelcomeProps> = ({ onSelectExample }) => {
-	return (
-		<WelcomeContainer>
-			<WelcomeTitle>GeminiGPT</WelcomeTitle>
-			<WelcomeSubtitle>
-				A ChatGPT-like interface powered by Google's Gemini AI. Ask a question or select an example below to get started.
-			</WelcomeSubtitle>
+  const [inputText, setInputText] = useState("");
 
-			<ExampleContainer>
-				{examplePrompts.map((example, index) => (
-					<ExampleCard key={index} onClick={() => onSelectExample(example.text)}>
-						<ExampleTitle>{example.title}</ExampleTitle>
-						<ExampleText>{example.text}</ExampleText>
-					</ExampleCard>
-				))}
-			</ExampleContainer>
-		</WelcomeContainer>
-	);
+  const handleSubmit = () => {
+    if (inputText.trim()) {
+      onSelectExample(inputText);
+      setInputText("");
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit();
+    }
+  };
+
+  return (
+    <WelcomeContainer>
+      <WelcomeContent>
+        <WelcomeTitle>What can I help you with?</WelcomeTitle>
+        <WelcomeSubtitle>
+          A ChatGPT-like interface powered by Google's Gemini AI.
+          Type your question below to get started.
+        </WelcomeSubtitle>
+
+        <ChatInputWrapper>
+          <ChatInputBox
+            placeholder="Ask Anything"
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+        </ChatInputWrapper>
+      </WelcomeContent>
+    </WelcomeContainer>
+  );
 };
 
 export default Welcome;
