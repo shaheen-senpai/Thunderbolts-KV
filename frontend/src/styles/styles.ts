@@ -285,6 +285,7 @@ export const SendButton = styled.button`
 	position: absolute;
 	right: 12px;
 	bottom: 12px;
+	margin-bottom: 8px;
 	width: 32px;
 	height: 32px;
 	border-radius: 4px;

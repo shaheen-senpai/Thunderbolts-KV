@@ -34,7 +34,7 @@ const Welcome: React.FC<WelcomeProps> = ({ onSelectExample }) => {
       <WelcomeContent>
         <WelcomeTitle>What can I help you with?</WelcomeTitle>
         <WelcomeSubtitle>
-          A ChatGPT-like interface powered by Google's Gemini AI.
+          A ChatGPT-like interface powered by AI.
           Type your question below to get started.
         </WelcomeSubtitle>
 

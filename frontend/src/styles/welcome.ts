@@ -48,6 +48,7 @@ export const WelcomeContent = styled.div`
   align-items: center;
   width: 100%;
   max-width: 720px;
+  margin-right: 250px;
 `;
 
 export const WelcomeTitle = styled.h1`
@@ -66,6 +67,9 @@ export const WelcomeSubtitle = styled.p`
 `;
 
 export const ChatInputWrapper = styled.div`
+display: flex;
+flex-direction: row;
+  justify-content: center;
   width: 100%;
   display: flex;
   align-items: center;
